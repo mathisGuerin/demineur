@@ -1,8 +1,16 @@
-import React from "react";
-import "./styles/App.css";
+import React, { useReducer } from "react";
+import "./styles/app.scss";
+import Game from "./components/Game";
+import { gameReducer, initialState, Context } from "./reducers/gameReducer";
 
 function App() {
-  return <div className="App"></div>;
+  const [store, dispatch] = useReducer(gameReducer, initialState);
+  const value = { store, dispatch };
+  return (
+    <Context.Provider value={value}>
+      <Game />
+    </Context.Provider>
+  );
 }
 
 export default App;
