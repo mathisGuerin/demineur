@@ -25,6 +25,7 @@ export const buildGrid = (size: number, minesCount: number): GridType => {
   return cells;
 };
 
+// Build the grid and update the store
 export const startGame = (size: number, bombs: number) => {
   var cells = buildGrid(size, bombs);
   return {

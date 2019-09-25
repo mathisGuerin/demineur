@@ -28,7 +28,7 @@ const Form = () => {
   return (
     <div className="Form">
       <h1>Bienvenue sur le démineur</h1>
-      <h2>Choisissez vos paramètres de jeux.</h2>
+      <h2>Choisissez vos paramètres de jeu.</h2>
       {store.errorMessage !== "" && (
         <div className="Form__error">{store.errorMessage}</div>
       )}
