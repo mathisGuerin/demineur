@@ -20,20 +20,20 @@ const Form = () => {
     } else {
       dispatch({
         type: "UDPDATE_ERROR_MESSAGE",
-        data: "Le nombre de bombes est supérieur au nombre de cases."
+        data: "The number of bombs is bigger than the number of cells."
       });
     }
   };
 
   return (
     <div className="Form">
-      <h1>Bienvenue sur le démineur</h1>
-      <h2>Choisissez vos paramètres de jeu.</h2>
+      <h1>Welcome to Minesweeper</h1>
+      <h2>Choose your game's parameters</h2>
       {store.errorMessage !== "" && (
         <div className="Form__error">{store.errorMessage}</div>
       )}
       <div className="Form__input">
-        <span>Taille de la grille</span>
+        <span>Size of the grid</span>
         <input
           type="number"
           name="UPDATE_SIZE"
@@ -42,7 +42,7 @@ const Form = () => {
         />
       </div>
       <div className="Form__input">
-        <span>Nombre de bombes</span>
+        <span>Number of bombs</span>
         <input
           type="number"
           name="UPDATE_BOMBS"
@@ -51,7 +51,7 @@ const Form = () => {
         />
       </div>
 
-      <button onClick={play}>Jouer</button>
+      <button onClick={play}>Play</button>
     </div>
   );
 };

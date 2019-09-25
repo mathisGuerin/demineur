@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Grid, { GridType } from "./Grid";
 import Form from "./Form";
 import "../styles/game.scss";
@@ -11,6 +11,7 @@ export type GameType = {
   bombs: number;
   isGameReady: boolean;
   errorMessage: string;
+  gameHelp: boolean;
   cells: GridType;
 };
 
@@ -23,26 +24,33 @@ const Game = () => {
   const { store, dispatch } = useContext(Context);
 
   const gameOver =
-    (isDefeated(store.cells) && "Perdu...") ||
-    (isVictorious(store.cells) && "Gagné !") ||
-    "Bonne chance !";
+    (isDefeated(store.cells) && "Game over...") ||
+    (isVictorious(store.cells) && "Congratulations !") ||
+    "Good luck !";
 
   return (
     <div className="Game">
       {store.isGameReady ? (
         <div className="Game_wrapper">
-          <div className="Game__header">{gameOver}</div> <Grid />
+          <div className="Game__header">{gameOver}</div>
+          <Grid />
           <button
             className="Game__playButton"
             onClick={() => dispatch({ type: "UPDATE_GAME_READY" })}
           >
-            Retour
+            Back
+          </button>
+          <button
+            className="Game__playButton"
+            onClick={() => dispatch({ type: "UPDATE_GAME_HELP" })}
+          >
+            {store.gameHelp ? "Hide help" : "Help"}
           </button>
           <button
             className="Game__playButton"
             onClick={() => dispatch(startGame(store.size, store.bombs))}
           >
-            Rejouer
+            Play again
           </button>
         </div>
       ) : (

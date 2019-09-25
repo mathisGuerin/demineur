@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../reducers/gameReducer";
 import "../styles/cell.scss";
 
 export type CellType = {
@@ -42,6 +43,8 @@ const cellStyle = (
 });
 
 export const Cell: React.FunctionComponent<CellProps> = ({ cell, onclick }) => {
+  const { store } = useContext(Context);
+
   return (
     <div
       className="Cell"
@@ -55,6 +58,7 @@ export const Cell: React.FunctionComponent<CellProps> = ({ cell, onclick }) => {
         onclick(ev);
       }}
     >
+      {store.gameHelp && cell.bomb && emojis["detonated"]}
       {emojis[cell.status]}
       {cell.bombsAround > 0 && cell.status === "dug" && cell.bombsAround}
     </div>

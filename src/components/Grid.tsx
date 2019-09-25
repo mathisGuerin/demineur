@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../reducers/gameReducer";
 import { Cell, CellType } from "./Cell";
 import "../styles/grid.scss";
@@ -48,7 +48,7 @@ export const Grid: React.FunctionComponent = props => {
       cells[index].status = "dug";
       if (bombsAround === 0) {
         // if there are no bombs arounds, we get all the index of adjacents cells
-        adjacentCells.map(cell => {
+        adjacentCells.forEach(cell => {
           if (cell !== undefined) {
             const index = getIndexByCoordinates(
               cell.coords.x,

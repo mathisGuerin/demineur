@@ -6,6 +6,7 @@ export const initialState: GameType = {
   bombs: 10,
   isGameReady: false,
   errorMessage: "",
+  gameHelp: false,
   cells: []
 };
 
@@ -71,6 +72,12 @@ export const gameReducer = (
               }
             : cell;
         })
+      };
+
+    case "UPDATE_GAME_HELP":
+      return {
+        ...state,
+        gameHelp: !state.gameHelp
       };
     default:
       return state;
