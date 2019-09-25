@@ -19,36 +19,59 @@ export const gameReducer = (
   action: GameActionType
 ): GameType => {
   switch (action.type) {
-    case "changeSize":
+    case "UPDATE_SIZE":
       return {
         ...state,
         size: action.data
       };
 
-    case "changeBombs":
+    case "UPDATE_BOMBS":
       return {
         ...state,
         bombs: action.data
       };
 
-    case "changeGameReady":
+    case "UPDATE_GAME_READY":
       return {
         ...state,
         isGameReady: !state.isGameReady
       };
 
-    case "changeErrorMessage":
+    case "UPDATE_ERROR_MESSAGE":
       return {
         ...state,
         errorMessage: action.data
       };
 
-    case "buildGrid":
+    case "CREATE_GRID":
       return {
         ...state,
         cells: action.data
       };
 
+    case "DIG":
+      return {
+        ...state,
+        cells: action.data
+      };
+
+    case "FLAG":
+      return {
+        ...state,
+        cells: state.cells.map(cell => {
+          return cell.index === action.data
+            ? {
+                ...cell,
+                status:
+                  cell.status === "flagged"
+                    ? "untouched"
+                    : cell.status === "dug"
+                    ? "dug"
+                    : "flagged"
+              }
+            : cell;
+        })
+      };
     default:
       return state;
   }

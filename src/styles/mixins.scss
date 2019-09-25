@@ -1,0 +1,11 @@
+@mixin buttonStyle {
+  padding: 6px;
+  font-size: 20px;
+  border: none;
+  background-color: #9fb083;
+  transition: all ease-in-out 200ms;
+
+  &:hover {
+    background-color: #829267;
+  }
+}

@@ -1,0 +1,36 @@
+@import "./mixins.scss";
+
+.Form {
+  padding: 30px;
+  max-width: 420px;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    color: #668b8a;
+  }
+
+  button {
+    @include buttonStyle;
+    display: block;
+    margin: 20px auto;
+    width: 60%;
+  }
+}
+
+.Form__input {
+  margin: 10px 0;
+
+  input {
+    height: 8px;
+    padding: 10px;
+  }
+  span {
+    padding: 0 10px;
+  }
+}
+
+.Form__error {
+  padding: 5px;
+  background-color: #ff8787;
+}

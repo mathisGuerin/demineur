@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../reducers/gameReducer";
-import { buildGrid } from "./Grid";
+import { startGame } from "../helpers/grid";
+import "../styles/form.scss";
 
 const Form = () => {
   const { store, dispatch } = useContext(Context);
@@ -14,22 +15,14 @@ const Form = () => {
   const play = () => {
     const { bombs, size } = store;
     if (bombs <= size * size) {
-      dispatch({ type: "changeGameReady" });
-      dispatch(startGame());
+      dispatch({ type: "UPDATE_GAME_READY" });
+      dispatch(startGame(size, bombs));
     } else {
       dispatch({
-        type: "changeErrorMessage",
+        type: "UDPDATE_ERROR_MESSAGE",
         data: "Le nombre de bombes est supérieur au nombre de cases."
       });
     }
-  };
-
-  const startGame = () => {
-    var cells = buildGrid(store.size, store.bombs);
-    return {
-      type: "buildGrid",
-      data: cells
-    };
   };
 
   return (
@@ -43,7 +36,7 @@ const Form = () => {
         <span>Taille de la grille</span>
         <input
           type="number"
-          name="changeSize"
+          name="UPDATE_SIZE"
           value={store.size}
           onChange={handleChange}
         />
@@ -52,7 +45,7 @@ const Form = () => {
         <span>Nombre de bombes</span>
         <input
           type="number"
-          name="changeBombs"
+          name="UPDATE_BOMBS"
           value={store.bombs}
           onChange={handleChange}
         />

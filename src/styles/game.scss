@@ -1,24 +1,22 @@
-.Form {
-  padding: 30px;
-  max-width: 420px;
-  margin: 0 auto;
+@import "./mixins.scss";
 
-  button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: lightsalmon;
-  }
+.Game {
+  color: #444444;
 }
 
-.Form__input {
+.Game_wrapper {
+  text-align: center;
+}
+
+.Game__header {
   margin: 10px 0;
-  span {
-    padding: 0 10px;
-  }
+  text-align: center;
+  font-size: 30px;
 }
 
-.Form__error {
-  padding: 5px;
-  background-color: #ff8787;
+.Game__playButton {
+  @include buttonStyle;
+  display: inline-block;
+  margin: 20px;
+  width: 200px;
 }

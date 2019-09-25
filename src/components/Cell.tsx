@@ -1,11 +1,12 @@
 import React from "react";
+import "../styles/cell.scss";
 
 export type CellType = {
+  index: number;
   bomb: boolean;
-  flagged: boolean;
-  dug: boolean;
   bombsAround: number;
   status: CellStatus;
+  coords: { x: number; y: number };
 };
 
 export type CellStatus = "untouched" | "flagged" | "dug" | "detonated";
@@ -26,14 +27,6 @@ const cellStyle = (
   status: CellStatus,
   bombsAround: number
 ): React.CSSProperties => ({
-  fontFamily: "Helvetica, Arial",
-  width: "40px",
-  height: "40px",
-  textAlign: "center",
-  lineHeight: "40px",
-  border: "1px solid black",
-  boxSizing: "border-box",
-  cursor: "pointer",
   backgroundColor:
     status === "untouched" || status === "flagged"
       ? "#8bc34a"
@@ -45,15 +38,14 @@ const cellStyle = (
       ? "green"
       : bombsAround === 2
       ? "#ff5722"
-      : "#d00000",
-  fontWeight: "bold",
-  fontSize: "28px",
-  transition: "all ease-in-out 200ms"
+      : "#d00000"
 });
 
 export const Cell: React.FunctionComponent<CellProps> = ({ cell, onclick }) => {
   return (
     <div
+      className="Cell"
+      style={cellStyle(cell.status, cell.bombsAround)}
       onClick={ev => {
         ev.preventDefault();
         onclick(ev);
@@ -62,7 +54,6 @@ export const Cell: React.FunctionComponent<CellProps> = ({ cell, onclick }) => {
         ev.preventDefault();
         onclick(ev);
       }}
-      style={cellStyle(cell.status, cell.bombsAround)}
     >
       {emojis[cell.status]}
       {cell.bombsAround > 0 && cell.status === "dug" && cell.bombsAround}
@@ -70,22 +61,24 @@ export const Cell: React.FunctionComponent<CellProps> = ({ cell, onclick }) => {
   );
 };
 
+// Create a cell with bomb and with defaults values
 export const withBomb = (): CellType => {
   return {
+    index: 0,
     bomb: true,
-    flagged: false,
-    dug: false,
     bombsAround: 0,
-    status: "untouched"
+    status: "untouched",
+    coords: { x: 0, y: 0 }
   };
 };
 
+// Create a cell without bomb and with defaults values
 export const withoutBomb = (): CellType => {
   return {
+    index: 0,
     bomb: false,
-    flagged: false,
-    dug: false,
     bombsAround: 0,
-    status: "untouched"
+    status: "untouched",
+    coords: { x: 0, y: 0 }
   };
 };
