@@ -51,7 +51,7 @@ const Form = () => {
         />
       </div>
 
-      <button onClick={play}>Play</button>
+      <button onClick={play}>Jouer</button>
     </div>
   );
 };
